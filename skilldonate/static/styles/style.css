@@ -1,0 +1,40 @@
+
+
+body {
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    font-weight: 400;
+    font-size: 1em;
+    background-color: aqua;
+}
+
+nav ul {
+    text-decoration: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem;
+}
+
+nav ul li a:hover {
+    color: black;
+}
+
+.main-header {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+}
+
+#nav-logo {
+    border-radius: 45%;
+}
+
+#nav-text {
+    font-size: 1.2em;
+}
