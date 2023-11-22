@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container-md">
+    <h1>Contact Us</h1>
+
+    <form action="{% url 'contact' %}" method="POST">
+        {% csrf_token %}
+        <div class="row mb-3">
+          <label for="email_input" class="col-sm-1 col-form-label">Email</label>
+          <div class="col-sm-5">
+            <input type="email" class="form-control" id="email_input">
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="msg_field" class="col-sm-1 col-form-label">Message</label>
+          <div class="col-sm-5">
+            <textarea class="form-control" id="msg_field" rows="5"></textarea>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary mx-auto">Submit </button>
+    </form>
+    </div>
+{% endblock content %}

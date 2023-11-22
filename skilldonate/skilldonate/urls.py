@@ -19,7 +19,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from .views import index
+from .views import index, how_it_works, about, contact
 
 
 
@@ -28,7 +28,12 @@ urlpatterns = [
     path("charities/", include("charities.urls")),
     path("volunteers/", include("volunteers.urls")),
     path("skills/", include("skills.urls")),
+    path("search/", include("search.urls")),
     path("", index, name='home'),
+    path("how-it-works", how_it_works, name='how-it-works'),
+    path("about", about, name='about'),
+    path("contact", contact, name='contact'),
+
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

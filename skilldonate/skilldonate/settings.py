@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'charities',
     'volunteers',
     'skills',
+    'search',
 ]
 
 MIDDLEWARE = [
