@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="col-lg-4">
+    <!-- <img href="#" class="bd-placeholder-img rounded-circle" width="140" height="140" role="img"/> -->
+    <h2 class="fw-normal">{{ user.charity.name }} {{ user.charity.last_name }}</h2>
+    <p><b>Phone: </b>{{ user.charity.phone }}</p>
+    <p><b>City: </b>{{ user.charity.city }}</p>
+    <p><b>Country: </b>{{ user.charity.country }}</p>
+
+    {% if request.user.is_authenticated and request.user == user %}
+        <a href="{% url 'charity-profile-update' user.id %}" class="btn btn-success">Update profile&raquo;</a>
+    {% endif %}
+
+  </div>
+
+{% endblock content %}

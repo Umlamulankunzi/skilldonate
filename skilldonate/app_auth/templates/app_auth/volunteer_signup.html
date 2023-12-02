@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
     <h1>Volunteer Signup</h1>
     <form action="{% url 'signup-volunteer' %}" method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form | crispy }}
         <input class="btn btn-primary" type="submit" value="Signup">
     </form>
     <p>Already registered?</p>

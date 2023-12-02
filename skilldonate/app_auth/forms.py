@@ -7,9 +7,9 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 class LoginForm(AuthenticationForm):
-    email = forms.EmailField(widget=forms.EmailInput())
-    password = forms.CharField(widget=forms.PasswordInput())
-
+    # email = forms.EmailField(widget=forms.EmailInput())
+    # password = forms.CharField(widget=forms.PasswordInput())
+    pass
 
 class VolunteerSignUpForm(UserCreationForm):
     email = forms.EmailField(widget=forms.EmailInput())
