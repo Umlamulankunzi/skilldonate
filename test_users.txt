@@ -1,0 +1,3 @@
+email,password,name
+test@gmail.com,m#P52s@ap$V,test
+test2@gmail.com,m#P52s@ap$V,test2
