@@ -57,7 +57,22 @@
                 </svg>
                 Search
               </a>
-              <a href="#" class="btn btn-primary">Login/Signup</a>
+
+              {% if request.user.is_authenticated %}
+                <a href="{% url 'logout' %}" class="">logout</a>
+
+                {% if request.user.is_charity %}
+                  <a href="{% url 'charity-profile'  request.user.id %}" class="btn btn-outline-info">{{ request.user.charity.name }}</a>
+                {% else %}
+                  <a href="{% url 'volunteer-profile' request.user.id %}" class="btn btn-primary">{{request.user.volunteer.name }}</a>
+                {% endif %}
+
+
+              {% else %}
+                <a href="{% url 'login' %}" class="btn btn-primary">Login/Signup</a>
+              {% endif %}
+
+
           </div>
         </div>
       </div>

@@ -29,11 +29,11 @@ urlpatterns = [
     path("volunteers/", include("volunteers.urls")),
     path("skills/", include("skills.urls")),
     path("search/", include("search.urls")),
+    path("skilldonate-auth/", include("app_auth.urls")),
     path("", index, name='home'),
     path("how-it-works", how_it_works, name='how-it-works'),
     path("about", about, name='about'),
     path("contact", contact, name='contact'),
-
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

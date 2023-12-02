@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'volunteers',
     'skills',
     'search',
+    'app_auth',
 ]
 
 MIDDLEWARE = [
@@ -114,6 +115,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+AUTH_USER_MODEL = 'app_auth.User'
+LOGIN_REDIRECT_URL = 'volunteer-home'
+LOGIN_URL = 'login'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
