@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.db import transaction
 from .models import Charity, Volunteer, User
 from django import forms
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, password_validation
 
 User = get_user_model()
 
@@ -12,15 +12,13 @@ class LoginForm(AuthenticationForm):
     pass
 
 class VolunteerSignUpForm(UserCreationForm):
-    email = forms.EmailField(widget=forms.EmailInput())
-    password1 = forms.CharField(widget=forms.PasswordInput())
-    password2 = forms.CharField(widget=forms.PasswordInput())
-
+    email = forms.EmailField(widget=forms.EmailInput(), label="Email Address")
+    # Additional Fields
     name = forms.CharField(widget=forms.TextInput())
-    last_name = forms.CharField(widget=forms.TextInput())
+    last_name = forms.CharField(widget=forms.TextInput(), required=False)
     phone = forms.CharField(widget=forms.TextInput())
-    city = forms.CharField(widget=forms.TextInput())
-    country = forms.CharField(widget=forms.TextInput())
+    city = forms.CharField(widget=forms.TextInput(), required=False)
+    country = forms.CharField(widget=forms.TextInput(), required=False, initial="zimbabwe")
 
     class Meta(UserCreationForm.Meta):
         model = User
@@ -44,11 +42,12 @@ class VolunteerSignUpForm(UserCreationForm):
 
 
 class CharitySignUpForm(UserCreationForm):
-    email = forms.EmailField(widget=forms.EmailInput())
-    password1 = forms.CharField(widget=forms.PasswordInput())
-    password2 = forms.CharField(widget=forms.PasswordInput())
+    email = forms.EmailField(widget=forms.EmailInput(), label="Email Address")
 
     name = forms.CharField(widget=forms.TextInput())
+
+    # TODO: Uncomment the below line to add phone contact here as well as model
+    # phone = forms.CharField(widget=forms.TextInput())
     description = forms.CharField(widget=forms.Textarea())
     city = forms.CharField(widget=forms.TextInput())
     country = forms.CharField(widget=forms.TextInput())
@@ -66,26 +65,10 @@ class CharitySignUpForm(UserCreationForm):
             user.save()
         charity = Charity.objects.create(
             user=user, name=self.cleaned_data.get('name'),
+            # TODO: uncomment below
+            # phone=self.cleaned_data.get('phone'),
             description=self.cleaned_data.get('description'),
             city=self.cleaned_data.get('city'),
             country=self.cleaned_data.get('country'),
             )
         return user
-
-
-
-
-
-# class QuestionForm(forms.ModelForm):
-#     question = forms.CharField(widget=forms.Textarea())
-
-#     class Meta:
-#         model = Question
-#         fields = ('question',)
-
-# class AnswerForm(forms.ModelForm):
-#     answer = forms.CharField(widget=forms.Textarea())
-
-#     class Meta:
-#         model = Answer
-#         fields = ('answer',)

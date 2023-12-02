@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 
 from app_auth.models import User, Volunteer, Charity
-from .forms import ProfileUpdateForm
+from .forms import ProfileUpdateForm, SkillRequiredForm
 from .decorators import charity_required
 from .models import SkillRequired
 from volunteers.models import InterestInSkillRequired
@@ -51,14 +51,14 @@ def charity_home(request):
 @login_required
 def skill_required_detail(request, skill_required_id):
     skill_required = SkillRequired.objects.get(id=skill_required_id)
-    if skill_required.charity != request.user.charity:
-        return redirect('charity-home')
+    # if skill_required.charity != request.user.charity:
+    #     return redirect('charity-home')
     volunteer_interest = InterestInSkillRequired.objects.filter(skill_required=skill_required)
     context = {
         'skill_required': skill_required,
         'volunteers_interested': volunteer_interest
     }
-    return render(request, 'charity/skill_required_detail.html', context)
+    return render(request, 'charities/skill_required_detail.html', context)
 
 
 @login_required
@@ -67,12 +67,12 @@ def create_skill_request(request):
     """Create a skill donation request"""
     #TODO: implement this
     if request.method == 'POST':
-        form = QuestionForm(request.POST)
+        form = SkillRequiredForm(request.POST)
         if form.is_valid():
-            question = form.save(commit=False)
-            question.charity = request.user.charity
-            question.save()
+            skill = form.save(commit=False)
+            skill.charity = request.user.charity
+            skill.save()
             return redirect('charity-home')
     else:
-        form = QuestionForm()
-    return render(request, 'app_auth/create_skill_request.html', {'form': form})
+        form = SkillRequiredForm()
+    return render(request, 'charities/create_skill_request.html', {'form': form})

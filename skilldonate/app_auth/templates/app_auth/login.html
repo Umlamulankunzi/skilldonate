@@ -2,7 +2,8 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <h1>Login</h1>
+<div style="width: 40%; margin-left: auto; margin-right: auto; padding-top: 1rem;">
+    <h2 class="text-center">Login</h2>
     <form action="{% url 'login' %}" method="POST">
         {% csrf_token %}
         {{ form | crispy }}
@@ -13,5 +14,5 @@
         <a class="link-primary" href="{% url 'signup-volunteer' %}">Signup as a Volunteer</a><br>
         <a class="link-primary" href="{% url 'signup-charity' %}">Signup as a Charity Organisation</a>
     </div>
-
+</div>
 {% endblock content %}

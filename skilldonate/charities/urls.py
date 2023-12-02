@@ -9,4 +9,5 @@ urlpatterns = [
     path("profile/update/<int:user_id>/", views.update_profile,
           name="charity-profile-update"),
     path("skill_required/<int:skill_required_id>/", views.skill_required_detail, name="skill-required-detail"),
+    path("skill_required/create/", views.create_skill_request, name="create-skill-required"),
 ]

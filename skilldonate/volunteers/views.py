@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 
@@ -63,15 +63,17 @@ def show_interest_in_skill_required(request, skill_required_id):
     skill = SkillRequired.objects.get(id=skill_required_id)
 
     if InterestInSkillRequired.objects.filter(
-            skill=skill, volunteer=request.user.volunteer).exists():
+            skill_required=skill, volunteer=request.user.volunteer).exists():
         # Change this to do nothing as interest already available
         # return redirect('volunteer-home')
-        pass
+        url = reverse('skill-required-detail', args=[skill.id])
+        return redirect(url)
 
     else:
-        InterestInSkillRequired.volunteer = request.user.volunteer
-        InterestInSkillRequired.skill_required = skill
-        InterestInSkillRequired.save()
+        interest = InterestInSkillRequired()
+        interest.volunteer = request.user.volunteer
+        interest.skill_required = skill
+        interest.save()
         url = reverse('skill-required-detail', args=[skill.id])
         return redirect(url)
 

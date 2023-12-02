@@ -56,7 +56,9 @@ class Charity(models.Model):
         User, on_delete=models.CASCADE, primary_key=True,
         related_name='charity')
     name = models.CharField(max_length=255)
+    # TODO: Uncomment below line
     # phone = models.CharField(max_length=255)
+
     # Brief description of charity
     # eg charity cares for orphans or maybe for the elderly
     description = models.TextField(
