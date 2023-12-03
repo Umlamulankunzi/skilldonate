@@ -48,7 +48,7 @@ class CharitySignUpForm(UserCreationForm):
 
     # TODO: Uncomment the below line to add phone contact here as well as model
     # phone = forms.CharField(widget=forms.TextInput())
-    description = forms.CharField(widget=forms.Textarea())
+    description = forms.CharField(widget=forms.Textarea(attrs={'rows': 3}))
     city = forms.CharField(widget=forms.TextInput())
     country = forms.CharField(widget=forms.TextInput())
 

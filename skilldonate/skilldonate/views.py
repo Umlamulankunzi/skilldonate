@@ -1,4 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
+from django.core.mail import send_mail
+from .forms import ContactForm
 
 # Create your views here.
 def index(request):
@@ -10,8 +12,29 @@ def how_it_works(request):
 def contact(request):
     if request.method == 'POST':
         # process contact info with provided email and message
-        return redirect("contact")
-    return render(request, "contact.html")
+        form = ContactForm(request.POST)
+    else:
+        form = ContactForm()
+
+    if form.is_valid():
+        # Access cleaned form data here
+        name = form.cleaned_data['name']
+        email = form.cleaned_data['email']
+        message = form.cleaned_data['message']
+
+        # Configure the email
+        subject = f'Skill Donate User: Message from {name}'
+        message = f'Name: {name}\nEmail: {email}\nMessage: {message}'
+        from_email = 'no_reply@skilldonate.com'
+        recipient_list = ['admin@skilldonate.com']
+
+        # Send the email
+        send_mail( subject, message, from_email, recipient_list)
+
+        # Redirect after success
+        return HttpResponse(f"Form Submitted\n{message}")
+
+    return render(request, "contact.html", {'form': form})
 
 def about(request):
     return render(request, "about.html")
