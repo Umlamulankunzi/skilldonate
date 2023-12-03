@@ -2,11 +2,12 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 
-from app_auth.models import User
+from app_auth.models import User, Volunteer
 from app_auth.forms import VolunteerSignUpForm
 from app_auth.decorators import volunteer_required
 from charities.models import SkillRequired
 from .models import InterestInSkillRequired, SkillOffered
+from .forms import ProfileUpdateForm
 
 # Create your views here.
 def index(request):
@@ -18,20 +19,37 @@ def profile(request, volunteer_id):
     context = {'user': user}
     return render(request, "volunteers/volunteer_profile.html", context)
 
+
 @login_required
 @volunteer_required
 def update_profile(request, volunteer_id):
     user = get_object_or_404(User, id=volunteer_id)
+    volunteer = Volunteer.objects.get(user=request.user)
     if request.method == "POST":
         # Update the profile and redirect to profile
-        form = UserProfileForm(request.POST, instance=user)
+        form = ProfileUpdateForm(request.POST, instance=volunteer)
         if form.is_valid():
             form.save()
-            url = reverse('volunteer-profile', args=[volunteer_id])
+            url = reverse('volunteer-profile', args=[user_id])
             return redirect(url)
     else:
-        form = VolunteerSignUpForm(instance=user)
+        form = ProfileUpdateForm(instance=volunteer)
     return render(request, 'volunteers/update_profile.html', {'form': form})
+
+# @login_required
+# @volunteer_required
+# def update_profile(request, volunteer_id):
+#     user = get_object_or_404(User, id=volunteer_id)
+#     if request.method == "POST":
+#         # Update the profile and redirect to profile
+#         form = UserProfileForm(request.POST, instance=user)
+#         if form.is_valid():
+#             form.save()
+#             url = reverse('volunteer-profile', args=[volunteer_id])
+#             return redirect(url)
+#     else:
+#         form = VolunteerSignUpForm(instance=user)
+#     return render(request, 'volunteers/update_profile.html', {'form': form})
 
 
 

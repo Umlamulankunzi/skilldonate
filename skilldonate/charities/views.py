@@ -49,6 +49,15 @@ def charity_home(request):
 
 
 @login_required
+def skills_required(request):
+    skills = SkillRequired.objects.all()
+    context = {
+        'skills': skills
+    }
+    return render(request, 'charities/skills_required.html', context)
+
+
+@login_required
 def skill_required_detail(request, skill_required_id):
     skill_required = SkillRequired.objects.get(id=skill_required_id)
     # if skill_required.charity != request.user.charity:

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.core.mail import send_mail
 from .forms import ContactForm
+from django.core.exceptions import PermissionDenied
 
 # Create your views here.
 def index(request):
@@ -22,14 +23,17 @@ def contact(request):
         email = form.cleaned_data['email']
         message = form.cleaned_data['message']
 
-        # Configure the email
-        subject = f'Skill Donate User: Message from {name}'
-        message = f'Name: {name}\nEmail: {email}\nMessage: {message}'
-        from_email = 'no_reply@skilldonate.com'
-        recipient_list = ['admin@skilldonate.com']
+        # TODO: configure settings of project for this section
+        # to send messages to admins from the contact form
 
-        # Send the email
-        send_mail( subject, message, from_email, recipient_list)
+        # # Configure the email
+        # subject = f'Skill Donate User: Message from {name}'
+        # message = f'Name: {name}\nEmail: {email}\nMessage: {message}'
+        # from_email = 'no_reply@skilldonate.com'
+        # recipient_list = ['admin@skilldonate.com']
+
+        # # Send the email
+        # send_mail( subject, message, from_email, recipient_list)
 
         # Redirect after success
         return HttpResponse(f"Form Submitted\n{message}")

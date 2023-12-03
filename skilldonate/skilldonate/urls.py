@@ -22,7 +22,6 @@ from django.conf.urls.static import static
 from .views import index, how_it_works, about, contact
 
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("charities/", include("charities.urls")),

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <h1>Results</h1>
+
+
+    {% if results|length > 0 %}
+    <ul>
+        {% for object in results %}
+            {% if category == '1' %}
+                <li>Donated skill</li>
+            {% elif category == '2' %}
+                <li>{{ object.skill_name }} - {{ object.charity.name }}</li>
+            {% elif category == '3' %}
+                <li>{{ object.name }}</li>
+            {% elif category == '4' %}
+                <li>{{ object.name }}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+    {% else %}
+        <p>No results found</p>
+    {% endif %}
+
+
+{% endblock content %}
