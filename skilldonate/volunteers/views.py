@@ -5,9 +5,10 @@ from django.urls import reverse
 from app_auth.models import User, Volunteer
 from app_auth.forms import VolunteerSignUpForm
 from app_auth.decorators import volunteer_required
-from charities.models import SkillRequired
-from .models import InterestInSkillRequired, SkillOffered
-from .forms import ProfileUpdateForm
+from charities.models import SkillRequired, InterestInSkillDonated
+from .models import InterestInSkillRequired, SkillDonated
+from .forms import ProfileUpdateForm, SkillDonateForm
+
 
 # Create your views here.
 def index(request):
@@ -97,3 +98,43 @@ def show_interest_in_skill_required(request, skill_required_id):
 
     # TODO: Link this with a btton on the template page of list of skills
     # required
+
+
+
+@login_required
+def skills_donated(request):
+    skills = SkillDonated.objects.all()
+    context = {
+        'skills': skills
+    }
+    return render(request, 'volunteers/skills_donated.html', context)
+
+
+@login_required
+def skill_donated_detail(request, skill_donated_id):
+    skill_donated = SkillDonated.objects.get(id=skill_donated_id)
+    # if skill_required.charity != request.user.charity:
+    #     return redirect('charity-home')
+    charity_interest = InterestInSkillDonated.objects.filter(skill_donated=skill_donated)
+    context = {
+        'skill_donated': skill_donated,
+        'charities_interested': charity_interest
+    }
+    return render(request, 'volunteers/skill_donated_detail.html', context)
+
+
+@login_required
+@volunteer_required
+def create_skill_donate(request):
+    """Create a skill donation request"""
+    #TODO: implement this
+    if request.method == 'POST':
+        form = SkillDonatedForm(request.POST)
+        if form.is_valid():
+            skill = form.save(commit=False)
+            skill.volunteer = request.user.volunteer
+            skill.save()
+            return redirect('volunteer-home')
+    else:
+        form = SkillDonatedForm()
+    return render(request, 'volunteers/create_skill_donate.html', {'form': form})

@@ -5,8 +5,8 @@ from django.urls import reverse
 from app_auth.models import User, Volunteer, Charity
 from .forms import ProfileUpdateForm, SkillRequiredForm
 from .decorators import charity_required
-from .models import SkillRequired
-from volunteers.models import InterestInSkillRequired
+from .models import SkillRequired, InterestInSkillDonated
+from volunteers.models import InterestInSkillRequired, SkillDonated
 
 # Create your views here.
 def charities(request):
@@ -19,6 +19,7 @@ def profile(request, user_id):
     user = get_object_or_404(User, id=user_id)
     context = {'user': user}
     return render(request, "charities/charity_profile.html", context)
+
 
 @login_required
 @charity_required
@@ -85,3 +86,28 @@ def create_skill_request(request):
     else:
         form = SkillRequiredForm()
     return render(request, 'charities/create_skill_request.html', {'form': form})
+
+
+
+@login_required
+@charity_required
+def show_interest_in_skill_donated(request, skill_donated_id):
+    skill = SkillDonated.objects.get(id=skill_donated_id)
+
+    if InterestInSkillDonted.objects.filter(
+            skill_donated=skill, charity=request.user.charity).exists():
+        # Change this to do nothing as interest already available
+        # return redirect('charity-home')
+        url = reverse('skill-donated-detail', args=[skill.id])
+        return redirect(url)
+
+    else:
+        interest = InterestInSkillDonated()
+        interest.charity = request.user.charity
+        interest.skill_donated = skill
+        interest.save()
+        url = reverse('skill-donated-detail', args=[skill.id])
+        return redirect(url)
+
+    # TODO: Link this with a btton on the template page of list of skills
+    # required

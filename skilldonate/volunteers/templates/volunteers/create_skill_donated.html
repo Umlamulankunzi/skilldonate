@@ -4,12 +4,12 @@
 
 {% block content %}
 <div class="container-md">
-    <h3 class="">Post required skill</h3>
+    <h3 class="">Post skill to Donate</h3>
     <img class="img-fluid w-25" src="{% static 'images/man-fix.jpg' %}" alt="man fixing electrical switch">
-    <form method="POST" action="{% url 'create-skill-required' %}">
+    <form method="POST" action="{% url 'create-skill-donation' %}">
         {% csrf_token %}
         {{ form | crispy }}
-        <button class="btn btn-primary" type="submit">Post skill required</button>
+        <button class="btn btn-primary" type="submit">Post skill to donate</button>
     </form>
 </div>
 {% endblock content %}

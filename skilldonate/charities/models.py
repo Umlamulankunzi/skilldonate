@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from app_auth.models import Charity
+# from volunteers.models import SkillDonated
 
 
 # Create your models here.
@@ -14,4 +15,10 @@ class SkillRequired(models.Model):
     description = models.TextField(
         blank=True,
         help_text="Please provide a brief description of skill required")
+    created_at = models.DateTimeField(default=timezone.now)
+
+
+class InterestInSkillDonated(models.Model):
+    skill_donated = models.ForeignKey("volunteers.SkillDonated", on_delete=models.CASCADE, related_name='skill_donated')
+    Charity = models.ForeignKey(Charity, on_delete=models.CASCADE, related_name='charity')
     created_at = models.DateTimeField(default=timezone.now)

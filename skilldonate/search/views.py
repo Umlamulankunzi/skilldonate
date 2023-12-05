@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import SearchForm
-from volunteers.models import SkillRequired, Volunteer
-from charities.models import Charity
+from volunteers.models import Volunteer, SkillDonated
+from charities.models import Charity, SkillRequired
 
 
 # Create your views here.
@@ -14,7 +14,7 @@ from charities.models import Charity
 
 def search(request):
     CHOICES_MAP = {
-        '1':'Donated Skill', '2': SkillRequired,
+        '1':SkillDonated, '2': SkillRequired,
         '3': Charity, '4': Volunteer
     }
     if request.method == 'POST':

@@ -1,5 +1,6 @@
 from django import forms
 from app_auth.models import Volunteer
+from .models import SkillDonated
 
 
 
@@ -13,3 +14,15 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Volunteer
         fields = ('name', 'last_name', 'phone', 'city', 'country')
+
+
+
+class SkillDonateForm(forms.ModelForm):
+    """Form for creating or updating skill required"""
+    skill_name = forms.CharField(widget=forms.TextInput())
+    category = forms.CharField(widget=forms.TextInput())
+    description = forms.CharField(widget=forms.Textarea(attrs={'rows': 3}))
+
+    class Meta:
+        model = SkillDonated
+        fields = ('skill_name', 'category', 'description')
