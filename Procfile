@@ -1,1 +1,1 @@
-web: gunicorn skilldonate.wsgi --log-file -
+web: gunicorn skilldonate.wsgi
