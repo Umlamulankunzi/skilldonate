@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'volunteers',
     'skills',
     'search',
+    'app_auth',
+    'crispy_forms',
+    'crispy_bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -114,6 +117,20 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Email config
+# TODO: complete email config
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_PORT = 25
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'studentjele@gmail.com'
+# EMAIL_HOST_PASSWORD = 'password'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+# Auth user model
+AUTH_USER_MODEL = 'app_auth.User'
+LOGIN_REDIRECT_URL = 'volunteer-home'
+LOGIN_URL = 'login'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -139,3 +156,8 @@ STATICFILES_DIRS = (
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Crispy forms settings
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"

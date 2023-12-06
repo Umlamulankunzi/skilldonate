@@ -49,6 +49,9 @@ var/
 .installed.cfg
 *.egg
 
+# VScode
+.vscode/
+
 # PyInstaller
 #  Usually these files are written by a python script from a template
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
@@ -91,3 +94,6 @@ django_venv/
 
 .env
 db.sqlite3
+
+test_data/
+

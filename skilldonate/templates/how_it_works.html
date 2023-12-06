@@ -1,157 +1,107 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block custom_styling %}
+  <link rel="stylesheet" href="{% static 'styles/how_it_works.css' %}">
+{% endblock custom_styling %}
+
+
 {% block content %}
-    <header>
-        <h1>How It Works</h1>
-    </header>
-
-    <section>
-        <h2>1. Volunteer Registration</h2>
-        <ul>
-            <li>Create an account: Sign up as a volunteer on skilldonate by providing your personal information and creating a secure login.</li>
-            <li>Access the platform: Once registered, you'll have full access to the skilldonate platform and its features.</li>
-        </ul>
-    </section>
-
-    <section>
-        <h2>2. Browse Skill Requirements</h2>
-        <ul>
-            <li>Explore non-profit skill requirements: Browse through the skill requirements posted by non-profit organizations. These requirements represent the specific skills they are seeking assistance with.</li>
-            <li>Find a match: If you possess the required skills, show your interest by indicating that you can help. Let non-profits know that you're available to contribute your expertise.</li>
-        </ul>
-    </section>
-
-    <section>
-        <h2>3. Post Your Skills</h2>
-        <ul>
-            <li>Share the skills you have: If you don't find any skill requirements that match your expertise, you can post the skills you are willing to donate. This allows non-profits to discover your skills and reach out to you for assistance.</li>
-        </ul>
-    </section>
-
-    <section>
-        <h2>4. Connect and Collaborate</h2>
-        <ul>
-            <li>Engage with non-profits: Once you've expressed interest or posted your skills, non-profit organizations will be able to connect with you. They can reach out to discuss potential collaborations or request further information.</li>
-            <li>Discuss project details: Communicate with non-profits to clarify project goals, timelines, and any other relevant details. This ensures a clear understanding between you and the non-profit organization.</li>
-        </ul>
-    </section>
-
-    <section>
-        <h2>5. Share Your Skills</h2>
-        <ul>
-            <li>Make a difference: Once you've agreed to collaborate with a non-profit, utilize your skills to support their mission. Share your expertise and contribute to their projects or initiatives.</li>
-            <li>Document your experience: After successfully working with a non-profit, you can post a testimonial to share your overall experience. Your testimonial will help other volunteers and non-profits understand the impact of your collaboration.</li>
-        </ul>
-    </section>
-
-    <section>
-        At skilldonate, we believe that your skills have the power to create change. Join our platform today, connect with non-profits, and make a meaningful difference in the world
-        <a href="signup.html">Get Started Now</a>.
-    </section>
-
-    <hr>
-    <div><h1>How it works</h1></div>
-    <div>
-        <p>
-            Welcome to the "How It Works" page of skilldonate! Here, we'll guide you through the process of using our platform to connect volunteers and non-profit organizations, facilitating skill sharing and making a positive impact.
+<div id="jumbotron" class="d-flex container-md">
+    <div class="mt-2 p-2 text-black rounded jumbo-text">
+        <h1 id="jumbo_header">How it works</h1>
+        <p class="lead" id="jumbo_text">
+            This guide explains how our website functions!
+            We aim to give you an overview of how the platform works
+            and how it can work for you to achieve great things.
         </p>
-<ol>
-    <li>
-        <h3>Volunteer Registration:</h3>
-        <ul>
-            <li>
-                <b>Create an account:</b>
-                Volunteers are required to register on skilldonate by providing their personal information and creating a secure login.
-            </li>
-            <li>
-                <b>Access the platform:</b>
-                Once registered, volunteers will have full access to the skilldonate platform, enabling them to explore and contribute their skills.
-            </li>
-        </ul>
-    </li>
-
-    <li>
-        <h3>Browse and Show Interest in Non-Profit Skill Requirements: </h3>
-        <ul>
-            <li>
-                <b>Skill requirements by non-profits:</b>
-                can view all the skills posted by non-profit organizations that they require assistance with.
-            </li>
-            <li>
-                <b>Show interest:</b>
-                If volunteers possess the required skills, they can show their interest and indicate their availability to help. This allows non-profits to know that the volunteers can contribute their expertise.
-            </li>
-        </ul>
-    </li>
-    <li>
-        <h3>Skills Available for Donation:</h3>
-        <ul>
-            <li>
-                <b>Share your skills:</b>
-                If volunteers do not find the specific skills they want to donate among the listed requirements, they can post the skills they possess. This helps non-profits discover volunteers with the required skills and reach out to them for assistance.
-            </li>
-        </ul>
-    </li>
-
-    <li>
-        <h3>Volunteer-Non-Profit Connection:</h3>
-        <ul>
-            <li>
-                <b>Collaboration initiation:</b>
-                Once volunteers show interest or post their skills, non-profit organizations can connect with them directly. They can discuss potential collaborations, project details, and request further information to ensure a clear understanding between both parties.
-            </li>
-        </ul>
-    </li>
-
-    <li>
-        <h3>Share Skills and Make a Difference:</h3>
-        <ul>
-            <li>
-                <b>Volunteer's contribution:</b>
-                Volunteers who collaborate with non-profit organizations can utilize their skills to support their mission and contribute to their projects or initiatives.
-            </li>
-            <li>
-                <b>Testimonial sharing:</b>
-                After successfully sharing their skills with non-profits, volunteers can post testimonials documenting their overall experience. This helps other volunteers and non-profits understand the impact of their collaboration.
-            </li>
-        </ul>
-    </li>
-
-    <li>
-        <h3>Non-Profit Registration:</h3>
-        <ul>
-            <li>
-                <b>Create an account:</b>
-                Non-profit organizations can register on the skilldonate platform to access the full features and functionalities.
-            </li>
-            <li>
-                <b>Browse and Select Volunteer Skills:</b>
-            </li>
-            <li>
-                <b>Skill exploration:</b>
-                Non-profits can browse the skills posted by volunteers and select the ones they require for their projects or initiatives.
-            </li>
-            <li>
-                <b>Post Skill Requirements:</b>
-                Alternatively, non-profits can post the specific skills they require on the platform and wait for volunteers to show interest and offer their skills.
-            </li>
-        </ul>
-    </li>
-
-    <li>
-        <h3>Non-Profit Testimonials:</h3>
-        <ul>
-            <li>
-                <b>Sharing experiences:</b>
-                Non-profit organizations can also post testimonials on the platform, sharing their experiences of working with skilled volunteers and the positive impact created.
-            </li>
-        </ul>
-    </li>
-
-    <div class="mt-3">
-        At skilldonate, we believe in the power of skill sharing. By connecting volunteers and non-profits, we create opportunities for collaboration and positive change. Join our platform today, register as a volunteer or non-profit, and start making a meaningful difference.
     </div>
-    <button class="btn btn-primary">Get Started Now</button>
+</div>
+<div class="d-flex container-sm row mt-3">
+  <div class="col-sm-6">
+    <h3>Volunteers</h3>
+    <p>
+      Volunteers who wish to engage Charity Organisations by donating their skills and time, can
+      use this Skill donate platform, to register a simple account and start offer their skills
+      for donation or they can also offer to donate to skill requirements posted by Charity
+      Organisations on the platform, by showing their interest, or contacting the Organisation.
+    </p>
+    <p>As a Volunteer you can:</p>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item ms-0 ps-0">
+        <a class="nav-link text-primary-emphasis" href="{% url 'signup-volunteer' %}">
+          <b>Create an account:</b>
+        </a>
+        Sign up as a volunteer on skilldonate by providing your personal information and
+        creating a secure login. Once registered as a volunteer, you'll have full access
+        to the skilldonate platform and its features.
+      </li>
+
+      <li class="list-group-item ps-0">
+        <a class="nav-link text-primary-emphasis" href="{% url 'charities-skills-required' %}">
+          <b>Browse Skill Requirements:</b>
+        </a>
+          As a volunteer you can browse through the skill requirements posted by non-profit
+          organizations. These requirements represent the specific skills they are seeking
+          assistance with. If you find a match for a skill you possess, you can show your
+          interest by indicating that you can help. This will Let non-profits know that
+          you're available to contribute your expertise.
+      </li>
+
+      <li class="list-group-item ps-0">
+        <a class="nav-link text-primary-emphasis" href="{% url 'create-skill-donation' %}">
+          <b>Post Skill Donations:</b>
+        </a>
+        Alternatively, Volunteers can post the specific skills they would like to donate on the
+        platform and wait for Charity Organisations to show interest in the donated skills.
+      </li>
+    </ul>
+  </div>
+
+  <div class="col-sm-6">
+    <h3>Charity Organisations</h3>
+    <p>
+      Charity Organisations who are seeking donations in the form of skills from skilled
+      volunteers can register on the platform and connect with volunteers wishing to donate
+      their skills. Charity Organisations, you can also browse donated skills posted by volunteers
+      organizations. These skills are skills which volunteers are willing to donate to Charity
+      Organisations.
+    </p>
+    <p>As a Charity Organisation you can:</p>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item ps-0">
+        <a class="nav-link text-primary-emphasis" href="{% url 'signup-volunteer' %}">
+          <b>Create an account:</b>
+        </a>
+        Charity organizations can register on the skilldonate platform to access the full features
+        and functionalities.
+      </li>
+
+      <li class="list-group-item ps-0">
+        <a class="nav-link text-primary-emphasis" href="{% url 'volunteers-skills-donated' %}">
+          <b>Browse Donated Skills:</b>
+        </a>
+          Charity Organisations can browse the skills posted by volunteers and select the ones they
+          require for their projects or initiatives.
+      </li>
+
+      <li class="list-group-item ps-0">
+        <a class="nav-link text-primary-emphasis" href="{% url 'create-skill-required' %}">
+          <b>Post Skill Requirements:</b>
+        </a>
+        Alternatively, Charity Organisations can post the specific skills they require on the platform
+        and wait for volunteers to show interest and offer their skills.
+      </li>
+
+      <li class="list-group-item ps-0">
+        <a class="nav-link text-primary-emphasis" href="{% url 'charity-testimonials' %}">
+          <b>Sharing experiences:</b>
+        </a>
+        Charity Organizations can also post testimonials on the platform, sharing their experiences
+        of working with skilled volunteers and the positive impact created.
+      </li>
+    </ul>
+  </div>
+</div>
 
 {% endblock content %}
