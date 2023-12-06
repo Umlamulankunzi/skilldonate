@@ -91,11 +91,36 @@ def create_skill_request(request):
 
 @login_required
 @charity_required
+def update_skill_required(request, skill_required_id):
+    skill_required = SkillRequired.objects.get(id=skill_required_id)
+    # if request.user.id != skill_donated.volunteer.user.id:
+    #     url = reverse('volunteer-home', args=[request.user.id])
+    #     return redirect(url)
+    skill_id = skill_required.id
+
+    if request.method == "POST":
+        # Update the profile and redirect to profile
+        form = SkillRequiredForm(request.POST, instance=skill_required)
+        if form.is_valid():
+            form.save()
+            url = reverse('skill-required-detail', args=[skill_required.id])
+            return redirect(url)
+    else:
+        form = SkillRequiredForm(instance=skill_required)
+    return render(
+        request, 'charities/update_skill_required.html',
+        {'form': form, 'skill_id': skill_id, })
+
+
+
+
+@login_required
+@charity_required
 def show_interest_in_skill_donated(request, skill_donated_id):
     skill = SkillDonated.objects.get(id=skill_donated_id)
 
-    if InterestInSkillDonted.objects.filter(
-            skill_donated=skill, charity=request.user.charity).exists():
+    if InterestInSkillDonated.objects.filter(
+            skill_donated=skill, Charity_id=request.user.id).exists():
         # Change this to do nothing as interest already available
         # return redirect('charity-home')
         url = reverse('skill-donated-detail', args=[skill.id])
@@ -103,7 +128,7 @@ def show_interest_in_skill_donated(request, skill_donated_id):
 
     else:
         interest = InterestInSkillDonated()
-        interest.charity = request.user.charity
+        interest.Charity = request.user.charity
         interest.skill_donated = skill
         interest.save()
         url = reverse('skill-donated-detail', args=[skill.id])

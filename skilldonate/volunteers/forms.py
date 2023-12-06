@@ -18,7 +18,7 @@ class ProfileUpdateForm(forms.ModelForm):
 
 
 class SkillDonateForm(forms.ModelForm):
-    """Form for creating or updating skill required"""
+    """Form for creating or updating skill donated"""
     skill_name = forms.CharField(widget=forms.TextInput())
     category = forms.CharField(widget=forms.TextInput())
     description = forms.CharField(widget=forms.Textarea(attrs={'rows': 3}))

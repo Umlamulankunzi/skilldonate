@@ -36,6 +36,11 @@ urlpatterns = [
       views.show_interest_in_skill_donated,
       name="show-interest-in-skill-donated"),
 
+    path(
+        "skills/required/update/<int:skill_required_id>/",
+        views.update_skill_required,
+        name="skill-required-update"),
+
     # TODO: implement
     path(
         "testimonials/",

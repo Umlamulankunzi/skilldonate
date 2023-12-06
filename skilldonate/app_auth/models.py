@@ -56,8 +56,7 @@ class Charity(models.Model):
         User, on_delete=models.CASCADE, primary_key=True,
         related_name='charity')
     name = models.CharField(max_length=255)
-    # TODO: Uncomment below line
-    # phone = models.CharField(max_length=255)
+    phone = models.CharField(max_length=30)
 
     # Brief description of charity
     # eg charity cares for orphans or maybe for the elderly
@@ -76,7 +75,7 @@ class Volunteer(models.Model):
         related_name='volunteer')
     name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255, blank=True)
-    phone = models.CharField(max_length=255)
+    phone = models.CharField(max_length=30)
     city = models.CharField(max_length=255)
     country = models.CharField(max_length=255, default="zimbabwe")
     created_at = models.DateTimeField(default=timezone.now)

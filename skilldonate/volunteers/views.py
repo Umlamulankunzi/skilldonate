@@ -63,7 +63,7 @@ def volunteer_home(request):
     # Getting only the 3 latest skills offered, volunteer should
     # importance given to required skills wjich volunteer should
     # be shown as much of.
-    skills_offered = SkillOffered.objects.filter(
+    skills_offered = SkillDonated.objects.filter(
         volunteer=request.user.volunteer).order_by('-created_at')[:3]
 
     skills_required = SkillRequired.objects.all()
@@ -100,7 +100,6 @@ def show_interest_in_skill_required(request, skill_required_id):
     # required
 
 
-
 @login_required
 def skills_donated(request):
     skills = SkillDonated.objects.all()
@@ -116,9 +115,11 @@ def skill_donated_detail(request, skill_donated_id):
     # if skill_required.charity != request.user.charity:
     #     return redirect('charity-home')
     charity_interest = InterestInSkillDonated.objects.filter(skill_donated=skill_donated)
+    for obj in charity_interest:
+        print(obj.Charity.name)
     context = {
         'skill_donated': skill_donated,
-        'charities_interested': charity_interest
+        'interests': charity_interest
     }
     return render(request, 'volunteers/skill_donated_detail.html', context)
 
@@ -129,12 +130,38 @@ def create_skill_donate(request):
     """Create a skill donation request"""
     #TODO: implement this
     if request.method == 'POST':
-        form = SkillDonatedForm(request.POST)
+        form = SkillDonateForm(request.POST)
         if form.is_valid():
             skill = form.save(commit=False)
             skill.volunteer = request.user.volunteer
             skill.save()
             return redirect('volunteer-home')
     else:
-        form = SkillDonatedForm()
-    return render(request, 'volunteers/create_skill_donate.html', {'form': form})
+        form = SkillDonateForm()
+    return render(request, 'volunteers/create_skill_donated.html', {'form': form})
+
+
+@login_required
+@volunteer_required
+def update_skill_donated(request, skill_donated_id):
+    skill_donated = SkillDonated.objects.get(id=skill_donated_id)
+    # if request.user.id != skill_donated.volunteer.user.id:
+    #     url = reverse('volunteer-home', args=[request.user.id])
+    #     return redirect(url)
+    skill_id = skill_donated.id
+
+    if request.method == "POST":
+        # Update the profile and redirect to profile
+        form = SkillDonateForm(request.POST, instance=skill_donated)
+        if form.is_valid():
+            form.save()
+            url = reverse('skill-donated-detail', args=[skill_donated.id])
+            return redirect(url)
+    else:
+        form = SkillDonateForm(instance=skill_donated)
+    return render(
+        request, 'volunteers/update_skill_donated.html',
+        {
+            'form': form,
+            'skill_id': skill_id,
+        })

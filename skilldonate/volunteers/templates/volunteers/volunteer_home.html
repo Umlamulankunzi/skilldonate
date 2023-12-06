@@ -3,7 +3,9 @@
 
 {% block content %}
   <div class="container-md">
-    <h2 class="text-center text-capitalize mt-1">{{ request.user.volunteer.name }} Homepage</h2>
+    <h2 class="text-center text-capitalize mt-1">
+      {{ request.user.volunteer.name }} {{ request.user.volunteer.last_name }} Homepage
+    </h2>
     <hr/>
     <h3 class="mb-lg-3 mb-md-2 mb-sm-1">Skills you offered</h3>
 
@@ -14,17 +16,17 @@
       <div class="row row-cols-1 row-cols-md-3 g-4">
         {% for skill in skills_offered %}
           <div class="col">
-            <a href="{% url 'skill-offered-detail' skill.id %}">
-              <div class="card h-100">
+              <div class="card h-100 bg-secondary text-white" >
                 <div class="card-body">
-                  <h5 class="card-title"> {{ skill.name }} </h5>
+                  <h5 class="card-title"> {{ skill.skill_name }} </h5>
                   <p class="card-text"> {{ skill.description }} </p>
                 </div>
                 <div class="card-footer">
-                  <small class="text-body-secondary">{{ skill.created_at }}</small>
+
+                  <small class="">{{ skill.created_at }}</small>
                 </div>
+                <a href="{% url 'skill-donated-detail' skill.id %}" class="stretched-link"></a>
               </div>
-            </a>
           </div>
         {% endfor %}
       </div>
@@ -42,7 +44,6 @@
       <div class="row row-cols-1 row-cols-md-3 g-4">
         {% for skill in skills_required %}
           <div class="col">
-            <a class="nav-link" href="{% url 'skill-required-detail' skill.id %}">
               <div class="card h-100">
                 <h4 class="card-header">{{ skill.charity.name }}</h4>
                 <div class="card-body">
@@ -52,8 +53,8 @@
                 <div class="card-footer">
                     <small class="text-body-secondary">{{ skill.created_at }}</small>
                 </div>
+                <a class="stretched-link" href="{% url 'skill-required-detail' skill.id %}"></a>
               </div>
-            </a>
           </div>
         {% endfor %}
       </div>

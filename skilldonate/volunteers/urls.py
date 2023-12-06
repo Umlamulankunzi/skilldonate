@@ -23,14 +23,22 @@ urlpatterns = [
       views.show_interest_in_skill_required,
       name="show-interest-in-skill-required"),
 
-    # TODO: implement
     path("skill/donate/create", views.create_skill_donate,
           name="create-skill-donation"),
 
-    # TODO: implement
     path(
       "skills/donated/",
       views.skills_donated,
       name="volunteers-skills-donated"),
+
+    path(
+        "skills/donated/<int:skill_donated_id>/",
+        views.skill_donated_detail,
+        name="skill-donated-detail"),
+
+    path(
+        "skills/donated/update/<int:skill_donated_id>/",
+        views.update_skill_donated,
+        name="skill-donated-update"),
 
 ]

@@ -12,11 +12,9 @@ from charities.models import Charity, SkillRequired
 #     return render(request, 'search/search_site.html')
 
 
+
+
 def search(request):
-    CHOICES_MAP = {
-        '1':SkillDonated, '2': SkillRequired,
-        '3': Charity, '4': Volunteer
-    }
     if request.method == 'POST':
         # process contact info with provided email and message
         form = SearchForm(request.POST)
@@ -28,13 +26,13 @@ def search(request):
         category = form.cleaned_data['category']
         query = form.cleaned_data['query']
         search_results = None
-        if category == '1':
-            pass
-        elif category == '2':
+        if category == '1': # Search SkillDonated objects
+            search_results = SkillDonated.objects.filter(skill_name__icontains=query)
+        elif category == '2':  # Search SkillRequired objects
             search_results = SkillRequired.objects.filter(skill_name__icontains=query)
-        elif category == '3':
+        elif category == '3':  # Search Charity objects
             search_results = Charity.objects.filter(name__icontains=query)
-        elif category == '4':
+        elif category == '4':  # Search Volunteer objects
             search_results = Volunteer.objects.filter(name=query)
 
         context = {

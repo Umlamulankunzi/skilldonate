@@ -45,13 +45,10 @@ class CharitySignUpForm(UserCreationForm):
     email = forms.EmailField(widget=forms.EmailInput(), label="Email Address")
 
     name = forms.CharField(widget=forms.TextInput())
-
-    # TODO: Uncomment the below line to add phone contact here as well as model
-    # phone = forms.CharField(widget=forms.TextInput())
+    phone = forms.CharField(widget=forms.TextInput())
     description = forms.CharField(widget=forms.Textarea(attrs={'rows': 3}))
     city = forms.CharField(widget=forms.TextInput())
     country = forms.CharField(widget=forms.TextInput())
-
 
     class Meta(UserCreationForm.Meta):
         model = User
@@ -65,8 +62,7 @@ class CharitySignUpForm(UserCreationForm):
             user.save()
         charity = Charity.objects.create(
             user=user, name=self.cleaned_data.get('name'),
-            # TODO: uncomment below
-            # phone=self.cleaned_data.get('phone'),
+            phone=self.cleaned_data.get('phone'),
             description=self.cleaned_data.get('description'),
             city=self.cleaned_data.get('city'),
             country=self.cleaned_data.get('country'),
